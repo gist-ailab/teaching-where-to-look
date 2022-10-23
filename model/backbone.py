@@ -51,6 +51,7 @@ class CAModule(nn.Module):
         x = self.sigmoid(x)
         return input * x, attn_out
 
+
 class SAModule(nn.Module):
     '''Spatial Attention Module'''
     def __init__(self):
