@@ -12,7 +12,6 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 - [ ] Environment settings and Train & Evaluation Readme
 - [ ] Inference code
 
-<br />
 
 # Getting Started
 ## Environment Setup
@@ -20,12 +19,30 @@ Tested on A100 with python 3.8, pytorch 1.8.0, torchvision 0.9.0, CUDA 11.2
 1. Download the Requirements
 2. Download the Python Environments
 
-<br />
 
 ## Dataset Preparation
-- 
+- We use the CASIA-WebFace dataset, aligned by MTCNN with the size of 112x112, for training
+- Download the **'faces_webface_112x112.zip'** from the [insightface](https://github.com/deepinsight/insightface/tree/master/recognition/_datasets_)
+    - This contains CASIA-Webface (train) and AgeDB-30 (evaluation) dataset
+    - Tools to restore the aligned images from mxnet binary file were provided [here](https://github.com/wujiyang/Face_Pytorch/tree/master/utils)
+        ```bash
+            ## require install mxnet (pip install mxnet-cpu)
+            # 1. AgeDB-30
+            python utility/load_images_from_bin.py
+            
+            # 2. CASIA-WebFace
+            python utility/load_images_from_bin.py
+            python utility/generate_data_list.py
+            
+        ```
+- Folder Structure
+    ```
+    |
+    |---
+    |
+    |---
 
-<br />
+    ```
 
 
 # Train & Evaluation
@@ -48,7 +65,6 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
     python test.py
     ```
 
-<br />
 
 # Inference
 
@@ -58,27 +74,32 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
 # License
 The source code of this repository is released only for academic use. See the [license]() file for details.
 
-<br />
 
 # Notes
 The codes of this repository are built upon the following open sources. Thanks to the authors for sharing the code!
 - Pytorch_ArcFace: https://github.com/wujiyang/Face_Pytorch
 - CBAM Attention Module: https://github.com/luuuyi/CBAM.PyTorch
-
-<br />
+- InsightFace: https://github.com/deepinsight/insightface
 
 
 # Citation
 ```
-@inproceedings{shin2022,
-  title={Teaching Where to Look: Attention Similarity Knowledge Distillation for Low Resolution Face Recognition},
-  author={Shin, Sungho and Lee, Joosoon and Lee, Junseok and Yu, Yeonguk and Lee, Kyoobin},
-  booktitle={2022 European Conference on Computer Vision (ECCV)},
-  year={2022}
+@InProceedings{10.1007/978-3-031-19775-8_37,
+author="Shin, Sungho
+and Lee, Joosoon
+and Lee, Junseok
+and Yu, Yeonguk
+and Lee, Kyoobin",
+title="Teaching Where to Look: Attention Similarity Knowledge Distillation for Low Resolution Face Recognition",
+booktitle="Computer Vision -- ECCV 2022",
+year="2022",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="631--647"
 }
-```
 
-<br />
+
+```
 
 
 # References
