@@ -59,25 +59,28 @@ if __name__ == '__main__':
     parser.add_argument('--down_size', nargs='+', default=[28])
     parser.add_argument('--batch_size', type=int, default=128, help='batch size')
     parser.add_argument('--class_num', type=int, default=10572, help='batch size')
-    parser.add_argument('--eval_folder', type=str, default='/home/sung/dataset/Face/evaluation')
+    parser.add_argument('--data_dir', type=str, default='/home/sung/dataset/Face')
     parser.add_argument('--result_dir', type=str, default='./result_folder')
     parser.add_argument('--gpus', type=str, default='0', help='model prefix')
     parser.add_argument('--name', type=str, default='teacher', help='meta information')
     args = parser.parse_args()
+
 
     # Downsize
     args.down_size = [int(s) for s in args.down_size]
     print(args.down_size)
     
     # Path
+    args.eval_folder = os.path.join(args.data_dir, 'evaluation')
+    
     args.agedb_test_root = os.path.join(args.eval_folder, 'agedb_30')
     args.agedb_file_list = os.path.join(args.eval_folder, 'agedb_30.txt')
     
     args.cplfw_test_root = os.path.join(args.eval_folder, 'cplfw/aligned_images')
     args.cplfw_file_list = os.path.join(args.eval_folder, 'cplfw/pairs_CPLFW.txt')
     
-
     os.makedirs(args.result_dir, exist_ok=True)
+    
     # Run
     run(args)
     
