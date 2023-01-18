@@ -249,15 +249,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PyTorch for deep face recognition')
     parser.add_argument('--save_dir', type=str, default='checkpoint/student_28', help='model save dir')
     parser.add_argument('--down_size', nargs='+', default=[28])
-    parser.add_argument('--total_iteres', type=int, default=47000, help='total epochs')
+    parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
     parser.add_argument('--batch_size', type=int, default=128, help='batch size')
-    parser.add_argument('--train_folder', type=str, default='/data/sung/dataset/Face/faces_webface_112x112/')
-    parser.add_argument('--eval_folder', type=str, default='/data/sung/dataset/Face/evaluation')
+    parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
 
     parser.add_argument('--distill_attn_param', type=float, default=5.0)
     parser.add_argument('--logit_distill', type=lambda x: x.lower()=='true', default=False, help='whether distill the logit along with the attention or not')
     
-    parser.add_argument('--teacher_path', type=str, default='/data/sung/checkpoint/LR_face/exp_Teacher_0/Iter_025000_net.ckpt')
+    parser.add_argument('--teacher_path', type=str, default='/data/sung/checkpoint/LR_face/exp_Teacher_0/last_net.ckpt')
     parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
     parser.add_argument('--gpus', type=str, default='0', help='model prefix')
     args = parser.parse_args()
@@ -268,6 +267,9 @@ if __name__ == '__main__':
     print(args.down_size)
     
     # Path
+    args.train_folder = os.path.join(args.data_dir, 'faces_webface_112x112')
+    args.eval_folder = os.path.join(args.data_dir, 'evaluation')
+    
     args.train_root = os.path.join(args.train_folder, 'image')
     args.train_file_list = os.path.join(args.train_folder, 'train.list')
 

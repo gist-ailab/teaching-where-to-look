@@ -1,13 +1,6 @@
 import numpy as np
 import scipy.io
-import os
-import json
 import torch.utils.data
-import torchvision.transforms as transforms
-from torch.nn import DataParallel
-import torch.nn.functional as F
-import argparse
-from utility.noise import get_gaussian_kernel
 
 def getAccuracy(scores, flags, threshold):
     p = np.sum(scores[flags == 1] > threshold)

@@ -7,7 +7,7 @@ import pickle
 import mxnet as mx
 import os
 from tqdm import tqdm
-
+import argparse
 '''
 For train dataset, insightface provide a mxnet .rec file, just install a mxnet-cpu for extract images
 '''
@@ -66,27 +66,37 @@ def generate_dataset_list(dataset_path,dataset_list):
      f.close()
 
 if __name__=='__main__':
-    # bin_path = '/SSD1/sung/dataset/Face/faces_webface_112x112/agedb_30.bin'
-    # save_dir = '/SSD1/sung/dataset/Face/evaluation/agedb_30'
-    # name = 'agedb_30'
-    # load_image_from_bin(bin_path, save_dir, name)
-    #
-    # bin_path = '/SSD1/sung/dataset/Face/faces_webface_112x112/lfw.bin'
-    # save_dir = '/SSD1/sung/dataset/Face/evaluation/lfw'
-    # name = 'lfw'
-    # load_image_from_bin(bin_path, save_dir, name)
-    #
-    # bin_path = '/SSD1/sung/dataset/Face/faces_webface_112x112/cfp_fp.bin'
-    # save_dir = '/SSD1/sung/dataset/Face/evaluation/cfp_fp'
-    # name = 'cfp_fp'
-    # load_image_from_bin(bin_path, save_dir, name)
+    parser = argparse.ArgumentParser(description='PyTorch for deep face recognition')
+    parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
+    parser.add_argument('--data_type', type=str, default='evaluation', help='train or evaluation')
+    args = parser.parse_args()
+    
+    data_type = args.data_type
+    data_dir = args.data_dir
+    
+    if data_type == 'evaluation':
+        bin_path = os.path.join(data_dir, 'casia_webface_112x112', 'agedb_30.bin')
+        save_dir = os.path.join(data_dir, 'evaluation', 'agedb_30')
+        name = 'agedb_30'
+        load_image_from_bin(bin_path, save_dir, name)
 
-    rec_path = '/data/sung/dataset/Face/faces_webface_112x112'
-    load_mx_rec(rec_path)
-    
-    
-    dataset = '/home/sung/dataset/Face/faces_webface_112x112/image'
-    list = '/home/sung/dataset/Face/faces_webface_112x112/train.list'
-    generate_dataset_list(dataset, list)
-    
+        bin_path = os.path.join(data_dir, 'casia_webface_112x112', 'lfw.bin')
+        save_dir = os.path.join(data_dir, 'evaluation', 'lfw')
+        name = 'lfw'
+        load_image_from_bin(bin_path, save_dir, name)
+        
+        bin_path = os.path.join(data_dir, 'casia_webface_112x112', 'cfp_fp.bin')
+        save_dir = os.path.join(data_dir, 'evaluation', 'cfp_fp')
+        name = 'cfp_fp'
+        load_image_from_bin(bin_path, save_dir, name)
 
+    elif data_type == 'train':
+        rec_path = os.path.join(data_dir, 'casia_webface_112x112')
+        load_mx_rec(rec_path)
+        
+        dataset = os.path.join(data_dir, 'casia_webface_112x112', 'image')
+        list = os.path.join(data_dir, 'casia_webface_112x112', 'train.list')
+        generate_dataset_list(dataset, list)
+    
+    else:
+        raise('Error!')

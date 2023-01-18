@@ -8,7 +8,6 @@ from dataset.agedb import AgeDB30
 from torch.optim import lr_scheduler
 import torch.optim as optim
 from evaluation.eval_agedb import evaluation_10_fold, getFeatureFromTorch
-import time
 import numpy as np
 import torchvision.transforms as transforms
 import argparse
@@ -171,10 +170,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_dir', type=str, default='checkpoint/teacher_28', help='model save dir')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--down_size', nargs='+', default=[28], help='down-sampling ratio')
-    
-    parser.add_argument('--train_folder', type=str, default='/data/sung/dataset/Face/faces_webface_112x112/')
-    parser.add_argument('--eval_folder', type=str, default='/data/sung/dataset/Face/evaluation')
-
+    parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
     parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
     
     parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
@@ -186,6 +182,9 @@ if __name__ == '__main__':
     print(args.down_size)
 
     # Path
+    args.train_folder = os.path.join(args.data_dir, 'faces_webface_112x112')
+    args.eval_folder = os.path.join(args.data_dir, 'evaluation')
+    
     args.train_root = os.path.join(args.train_folder, 'image')
     args.train_file_list = os.path.join(args.train_folder, 'train.list')
 
