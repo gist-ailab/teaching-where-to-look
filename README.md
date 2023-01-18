@@ -7,9 +7,9 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 
 
 # Updates & TODO Lists
-- [x] A-SKD has been released (2022.10.02)
-- [x] Demo video and pretrained checkpoints (2022.10.23)
-- [X] Environment settings and Train & Evaluation Readme (2023.01.18)
+- [x] A-SKD has been released
+- [x] Demo video and pretrained checkpoints
+- [X] Environment settings and Train & Evaluation Readme
 
 
 # Getting Started
