@@ -95,17 +95,6 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 # Train & Evaluation
 All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (batchsize=256)
 
-
-    parser.add_argument('--save_dir', type=str, default='checkpoint/teacher_28', help='model save dir')
-    parser.add_argument('--batch_size', type=int, default=256, help='batch size')
-    parser.add_argument('--down_size', nargs='+', default=[28], help='down-sampling ratio')
-    parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
-    parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
-    
-    parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
-    parser.add_argument('--gpus', type=str, default='1', help='model prefix')
-
-
 1. Train Teacher Network (112x112 face images) <br />
     [[Teacher Checkpoint]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/Eg_NHoY_LhxNgUZ4mk3OA-MB_YsE7I3akg6MOoNfEi9yZQ?e=bkJ4z4)
     ```bash
