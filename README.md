@@ -117,10 +117,9 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
 
 3. Evaluation
     ```bash
-    python test.py
+    python test.py --checkpoint_path $CHECKPOINT_PATH --down_size $DOWN_SIZE --batch_size $BATCH_SIZE --data_dir $FACE_DIR --gpus $GPU_ID
     ```
-
-
+    
 # License
 The source code of this repository is released only for academic use. See the [license](LICENSE) file for details.
 
