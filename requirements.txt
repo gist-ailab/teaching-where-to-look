@@ -1,0 +1,5 @@
+scipy
+mxnet
+numpy
+tqdm
+cv2
