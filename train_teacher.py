@@ -167,7 +167,7 @@ def run(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PyTorch for deep face recognition')
-    parser.add_argument('--save_dir', type=str, default='checkpoint/teacher_28', help='model save dir')
+    parser.add_argument('--save_dir', type=str, default='checkpoint/teacher', help='model save dir')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--down_size', nargs='+', default=[28], help='down-sampling ratio')
     parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')

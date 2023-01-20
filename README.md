@@ -131,6 +131,19 @@ The codes of this repository are built upon the following open sources. Thanks t
 - InsightFace: https://github.com/deepinsight/insightface
 
 
+# Issues
+1. OpenCV install error
+    - libGL.so.1: cannot open shared object file: No such file or directory
+        ```bash
+        apt-get update
+        apt-get -y install libgl1-mesa-glx
+        ```
+    - libgthread-2.0.so.0: cannot open shared object file: No such file or directory
+        ```
+        apt-get -y install libglib2.0-0
+        ```
+
+
 # Citation
 ```
 @InProceedings{10.1007/978-3-031-19775-8_37,

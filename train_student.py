@@ -148,16 +148,6 @@ def run(args):
             loss_tot = loss_ce + loss_attn_distill
 
 
-            # Logit Distillation Loss
-            if args.logit_distill:
-                T = 4
-                p = F.log_softmax(LR_out/T, dim=1)
-                q = F.softmax(HR_out/T, dim=1)
-                loss_logit_distill = F.kl_div(p, q, size_average=False) * (T**2) / LR_out.size(0)
-                
-                loss_tot += loss_logit_distill
-                      
-                        
             # Backward
             optimizer.zero_grad()
             loss_tot.backward()
@@ -254,9 +244,8 @@ if __name__ == '__main__':
     parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
 
     parser.add_argument('--distill_attn_param', type=float, default=5.0)
-    parser.add_argument('--logit_distill', type=lambda x: x.lower()=='true', default=False, help='whether distill the logit along with the attention or not')
     
-    parser.add_argument('--teacher_path', type=str, default='/data/sung/checkpoint/LR_face/exp_Teacher_0/last_net.ckpt')
+    parser.add_argument('--teacher_path', type=str, default='/data/sung/checkpoint/teacher/last_net.ckpt')
     parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
     parser.add_argument('--gpus', type=str, default='0', help='model prefix')
     args = parser.parse_args()
