@@ -14,7 +14,7 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 
 # Getting Started
 ## Environment Setup
-- Tested on A100 with python 3.8, pytorch 1.8.0, torchvision 0.9.0, CUDA 11.2
+- Tested on A100 with python 3.7, pytorch 1.8.0, torchvision 0.9.0, CUDA 11.2
 - Install Requirements
     ```
     pip install -r requirements.txt
