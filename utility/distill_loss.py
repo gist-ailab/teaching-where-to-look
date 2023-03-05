@@ -21,6 +21,7 @@ class DistillLoss(nn.Module):
         for l, h in zip(low_feature, high_feature):
             l = l.reshape(l.size(0), -1)
             h = h.reshape(h.size(0), -1)
+            
             d_loss = self.criterion(l, h)
 
             loss_sum += d_loss * self.args.distill_attn_param

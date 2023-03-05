@@ -10,7 +10,7 @@ class attention_manager(object):
         self.model = model
         
         if multi_gpu:
-            self.register_hook(self.module.model)
+            self.register_hook(self.model.module)
         else:
             self.register_hook(self.model)
             

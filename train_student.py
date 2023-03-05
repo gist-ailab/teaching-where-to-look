@@ -126,19 +126,34 @@ def run(args):
             # Extract Attention Map
             LR_feat, HR_feat = [], []
             
+            
+            # Re-arrange Device for Multi GPUs
+            if multi_gpus:
+                HR_imp, LR_imp = [], []
+                
+                hr_device = np.array([str(hr[0].device) for hr in HR_manager.attention])
+                lr_device = np.array([str(lr[0].device) for lr in LR_manager.attention])
+                
+                for ord in np.unique(hr_device):
+                    HR_imp += np.array(HR_manager.attention)[hr_device == ord].tolist()
+                    LR_imp += np.array(LR_manager.attention)[lr_device == ord].tolist()                    
+
+                HR_manager.attention = HR_imp
+                LR_manager.attention = LR_imp
+            
+            
             for ix in range(len(LR_manager.attention)):
                 # Channel
-                LR_feat.append(LR_manager.attention[ix][0])
-                HR_feat.append(HR_manager.attention[ix][0])
+                LR_feat.append(LR_manager.attention[ix][0].to(device))
+                HR_feat.append(HR_manager.attention[ix][0].to(device))
                 
                 # Spatial                    
-                LR_feat.append(LR_manager.attention[ix][1])
-                HR_feat.append(HR_manager.attention[ix][1])
+                LR_feat.append(LR_manager.attention[ix][1].to(device))
+                HR_feat.append(HR_manager.attention[ix][1].to(device))
 
-
+                
             # Attention Distillation Loss 
-            loss_attn_distill = criterion_distill(LR_feat, HR_feat)
-            
+            loss_attn_distill = criterion_distill(LR_feat, HR_feat) / len(args.gpus.split(','))
             
             # Target Loss
             loss_ce = criterion_ce(LR_out, label)
@@ -240,12 +255,12 @@ if __name__ == '__main__':
     parser.add_argument('--save_dir', type=str, default='checkpoint/student_28', help='model save dir')
     parser.add_argument('--down_size', nargs='+', default=[28])
     parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
-    parser.add_argument('--batch_size', type=int, default=128, help='batch size')
+    parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
 
     parser.add_argument('--distill_attn_param', type=float, default=5.0)
     
-    parser.add_argument('--teacher_path', type=str, default='/data/sung/checkpoint/teacher/last_net.ckpt')
+    parser.add_argument('--teacher_path', type=str, default='checkpoint/teacher/last_net.ckpt')
     parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
     parser.add_argument('--gpus', type=str, default='0', help='model prefix')
     args = parser.parse_args()
