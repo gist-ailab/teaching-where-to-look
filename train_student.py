@@ -99,8 +99,8 @@ def run(args):
     best_agedb30_iters = 0
     total_iters = 0
 
-    
-    for epoch in range(1, 10000):
+    GOING = True
+    while GOING:
         scheduler.step()
 
         # Train model
@@ -205,6 +205,7 @@ def run(args):
 
 
             if total_iters == args.total_iters:
+                GOING = False
                 break
             
 
