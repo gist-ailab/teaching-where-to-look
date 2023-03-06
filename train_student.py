@@ -179,7 +179,7 @@ def run(args):
                 total = label.size(0)
                 correct = (np.array(predict.cpu()) == np.array(label.data.cpu())).sum()
                 
-                print("Iters: {:0>6d}/[{:0>2d}], loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, epoch, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
+                print("Iters: {:0>6d}/[{:0>2d}], loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, args.total_iters, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
 
 
             # Save model
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PyTorch for deep face recognition')
     parser.add_argument('--save_dir', type=str, default='checkpoint/student_28', help='model save dir')
     parser.add_argument('--down_size', nargs='+', default=[28])
-    parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
+    parser.add_argument('--total_iters', type=int, default=47000, help='total iters')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
 

@@ -101,7 +101,7 @@ def run(args):
                 _, predict = torch.max(HR_out.data, 1)
                 total = label.size(0)
                 correct = (np.array(predict.cpu()) == np.array(label.data.cpu())).sum()
-                print("Iters: {:0>6d}/[{:0>2d}], loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, epoch, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
+                print("Iters: {:0>6d}/[{:0>2d}], loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, args.total_iters, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
 
             
             # Save model
