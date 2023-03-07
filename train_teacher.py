@@ -73,8 +73,7 @@ def run(args):
     best_agedb30_iters = 0
     total_iters = 0
 
-    GOING = True
-    while GOING:
+    for epoch in range(args.total_epoch):
         scheduler.step()
 
         # Train model
@@ -101,7 +100,7 @@ def run(args):
                 _, predict = torch.max(HR_out.data, 1)
                 total = label.size(0)
                 correct = (np.array(predict.cpu()) == np.array(label.data.cpu())).sum()
-                print("Iters: {:0>6d}/[{:0>2d}], loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, args.total_iters, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
+                print("Iters: {:0>6d}, loss: {:.4f}, train_accuracy: {:.4f}, learning rate: {}".format(total_iters, loss_ce.item(), 100*correct/total, scheduler.get_lr()[0]))
 
             
             # Save model
@@ -126,10 +125,6 @@ def run(args):
                     'net_state_dict': margin_state_dict},
                     os.path.join(args.save_dir, 'Iter_%06d_margin.ckpt' % total_iters))
             
-            if total_iters == args.total_iters:
-                GOING = False
-                break
-
 
     # Final Checkpoint
     if multi_gpus:
@@ -170,11 +165,10 @@ def run(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PyTorch for deep face recognition')
     parser.add_argument('--save_dir', type=str, default='checkpoint/teacher', help='model save dir')
-    parser.add_argument('--batch_size', type=int, default=256, help='batch size')
+    parser.add_argument('--batch_size', type=int, default=128, help='batch size')
     parser.add_argument('--down_size', nargs='+', default=[28], help='down-sampling ratio')
     parser.add_argument('--data_dir', type=str, default='/data/sung/dataset/Face')
-    parser.add_argument('--total_iters', type=int, default=47000, help='total epochs')
-    
+    parser.add_argument('--total_epoch', type=int, default=20, help='total epochs')
     parser.add_argument('--save_freq', type=int, default=5000, help='save frequency')
     parser.add_argument('--gpus', type=str, default='1', help='model prefix')
     args = parser.parse_args()
