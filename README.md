@@ -6,7 +6,7 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 [[Paper]](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720622.pdf) [[ArXiv]](https://arxiv.org/abs/2209.14498) [[Presentation]](https://gisto365-my.sharepoint.com/:v:/g/personal/hogili89_gm_gist_ac_kr/Ed0o5yarRXZKqyhfl1ZpoK4BE_4ZVp8IV4_wjFyA0M-XQA?e=9zDdv3) [[Demo]](https://gisto365-my.sharepoint.com/:v:/g/personal/hogili89_gm_gist_ac_kr/EX8hV14c9L9IjvL0ZuveE28BsY1wO55l4Io18ZDDKrBKhQ?e=NDYAdJ)
 
 - **Note!**
-    We updated the [new priprint](https://arxiv.org/abs/2303.04681) and its [code](https://github.com/gist-ailab/feature-similarity-KD) which achieves SOTA results on various face LR tasks. 
+    We updated the [new priprint (F-SKD)](https://arxiv.org/abs/2303.04681) and its [code](https://github.com/gist-ailab/feature-similarity-KD) which achieves SOTA results on various face LR tasks. 
 
 # Updates & TODO Lists
 - [x] A-SKD has been released
