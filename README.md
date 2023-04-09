@@ -9,7 +9,12 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 # Updates & TODO Lists
 - [x] A-SKD has been released
 - [x] Demo video and pretrained checkpoints
-- [X] Environment settings and Train & Evaluation Readme
+- [x] Environment settings and Train & Evaluation Readme
+- [ ] Identification code 
+
+- **Note!**
+    We updated the [new priprint](https://arxiv.org/abs/2303.04681) and its [code](https://github.com/gist-ailab/feature-similarity-KD) which achieves SOTA results on various face LR tasks. 
+
 
 
 # Getting Started

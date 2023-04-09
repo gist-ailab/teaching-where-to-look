@@ -2,4 +2,4 @@ scipy
 mxnet
 numpy
 tqdm
-opencv-python
+opencv-python==4.4.0.46
