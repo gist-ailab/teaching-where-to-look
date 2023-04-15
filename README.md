@@ -110,8 +110,8 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
     - You can reference the train scripts in the [$scripts/train_teacher.sh](scripts/train_teacher.sh)
     
 
-2. Train Student Network (14x14, 28x28, 56x56 face images) <br />
-    [[Student 14x14]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/EpUj-Qbz9vVKshU2HIVRvjYBLE-rrv-7qUoqUjlrU4pWGg?e=sP5TDp), [[Student 28x28]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/ErwdAAtUceJBgzMShNY7cR8BQzgH1MhO-gg_q1axGc9PIg?e=iArIbK), [[Student 56x56]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/EiSpmbZcNVJMu-uA4OH4qTUBF1oBghvPvTdDAnugjLJmzg?e=u2fFOZ) 
+2. Train Student Network (14x14, 28x28, 56x56 face images) or (24x24 face images for tinyface test) <br />
+    [[Student 14x14]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/EpUj-Qbz9vVKshU2HIVRvjYBLE-rrv-7qUoqUjlrU4pWGg?e=sP5TDp), [[Student 28x28]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/ErwdAAtUceJBgzMShNY7cR8BQzgH1MhO-gg_q1axGc9PIg?e=iArIbK), [[Student 56x56]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/EiSpmbZcNVJMu-uA4OH4qTUBF1oBghvPvTdDAnugjLJmzg?e=u2fFOZ), [[Student 24x24]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/ErwPZt1nOh1Iove8nxCZKV4BjbJeoRgCBVtjcf7VFivNfg?e=SDklXy).
     ```bash
     python train_student.py --save_dir $CHECKPOINT_DIR --down_size $DOWN_SIZE --total_iters $TOTAL_ITERS \
                             --batch_size $BATCH_SIZE --teacher_path $TEACHER_CHECKPOINT_PATH --gpus $GPU_ID \
@@ -121,10 +121,26 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
 
 
 3. Evaluation
-    ```bash
-    python test.py --checkpoint_path $CHECKPOINT_PATH --down_size $DOWN_SIZE --batch_size $BATCH_SIZE --data_dir $FACE_DIR --gpus $GPU_ID
-    ```
-    
+    - Evaluation on AgeDB-30 (Verification)
+        ```bash
+        python test_agedb.py --checkpoint_path $CHECKPOINT_PATH --down_size $DOWN_SIZE --batch_size $BATCH_SIZE \
+                            --data_dir $FACE_DIR --gpus $GPU_ID
+        ```
+        
+    - Evaluation on TinyFace (Identification)
+        - First, download the pre-processed [tinyface dataset](https://github.com/mk-minchul/AdaFace/tree/master/validation_lq)
+            The folder structure can be defined as follows:
+                ```bash
+                tinyface/
+                    - tinyface/
+                    - aligned_pad_0.1_pad_high
+                ```
+        - We employ LR network trained on 24 x 24 resolution for TinyFace evaluation
+            ```bash
+            python test_tinyface.py --checkpoint_path $CHECKPOINT_PATH --batch_size $BATCH_SZIE --tinyface_dir $TINYFACE_DIR --save_dir $SAVE_DIR --gpus $GPU_ID
+            ```
+        
+
 # License
 The source code of this repository is released only for academic use. See the [license](LICENSE) file for details.
 

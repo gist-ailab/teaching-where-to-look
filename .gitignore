@@ -133,3 +133,4 @@ dmypy.json
 *.mp4
 demo/
 checkpoint/
+result/
