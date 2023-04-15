@@ -97,7 +97,7 @@ Official Implementation of the **"Teaching Where to Look: Attention Similarity K
 
 
 # Train & Evaluation
-All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (batchsize=256)
+All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (batchsize=128)
 
 1. Train Teacher Network (112x112 face images) <br />
     [[Teacher Checkpoint]](https://gisto365-my.sharepoint.com/:f:/g/personal/hogili89_gm_gist_ac_kr/Eg_NHoY_LhxNgUZ4mk3OA-MB_YsE7I3akg6MOoNfEi9yZQ?e=bkJ4z4)
