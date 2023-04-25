@@ -129,9 +129,12 @@ All networks (iResNet50 with CBAM module) were trained using a single A100 GPU (
     - Evaluation on TinyFace (Identification)
         - Download the pre-processed [TinyFace dataset](https://github.com/mk-minchul/AdaFace/tree/master/validation_lq). After unzip, the directory structure can be defined as follows:
             ```bash
-            tinyface/
-                - tinyface/
-                - aligned_pad_0.1_pad_high/
+            - aligned_pad_0.1_pad_high/
+                - Probe/
+                - Train/
+                - Gallery_Match/
+                - Gallery_Disctractor/
+                - 
             ```
 
         - We employ LR network trained on 24 x 24 resolution for TinyFace evaluation
