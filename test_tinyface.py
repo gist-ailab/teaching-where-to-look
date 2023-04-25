@@ -133,7 +133,7 @@ def calc_accuracy(tinyface_test, probe, gallery, do_norm=True):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='tinyface')
-    parser.add_argument('--tinyface_dir', default='Face/tinyface')
+    parser.add_argument('--tinyface_dir', default='Face/tinyface/aligned_pad_0.1_pad_high/')
     parser.add_argument('--gpus', default='1', type=str)
     parser.add_argument('--batch_size', default=512, type=int, help='')
     parser.add_argument('--mode', type=str, default='cbam', help='attention type')
